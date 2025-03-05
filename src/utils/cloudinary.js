@@ -2,7 +2,7 @@ import fs from "fs"
 import { config } from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 
-config({path:"./.env"})
+config({ path: "./.env" })
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -15,7 +15,8 @@ const uploadOnCloudinary = async (localFilePath) => {
     try {
         if (!localFilePath) return null;
         const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: "auto"
+            resource_type: "auto",
+            folder: 'videoTube'
         })
         fs.unlinkSync(localFilePath)
         return response;
